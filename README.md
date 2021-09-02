@@ -1,4 +1,3 @@
 # Sketchpad
-### First deployment is done. 
-<hr>
-- Changes are yet to come
+### First deployment is done.
+  - Changes are yet to come
