@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Drawing App</title>
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<!-- <h1>Hello poppers</h1> -->
+		<canvas></canvas>
+		<div class="tools">
+			<div class="font">
+				<p style="font-size: 1.1em; user-select: none">Font size:</p>
+				<input type="range" min="50" max="1000" value="400" class="slider" />
+				<span class="rangeValue"></span>
+			</div>
+			<div class="colors">
+				<button
+					class="red"
+					value="#ff3131"
+					style="background-color: #ff3131"
+				></button>
+				<button
+					class="blue"
+					value="#0096ff"
+					style="background-color: #0096ff"
+				></button>
+				<button
+					class="green"
+					value="#228b22"
+					style="background-color: #228b22"
+				></button>
+				<button
+					class="black"
+					value="#000"
+					style="background-color: #000"
+				></button>
+				<button
+					class="yellow"
+					value="#fff700"
+					style="background-color: #fff700"
+				></button>
+				<button
+					class="orange"
+					value="#ff7f50"
+					style="background-color: #ff7f50"
+				></button>
+				<button
+					class="magenta"
+					value="#c71585"
+					style="background-color: #c71585"
+				></button>
+				<button
+					class="charcoal"
+					value="#36454f"
+					style="background-color: #36454f"
+				></button>
+				<input type="color" name="color" class="color-range" />
+			</div>
+		</div>
+	</body>
+</html>
