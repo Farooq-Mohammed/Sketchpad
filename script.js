@@ -77,8 +77,10 @@ window.addEventListener("load", () => {
 	}
 
 	function tstartPosition(e) {
-		if (e.target.length == 2 && ev.targetTouches.length == 2)
+		if (e.target.length == 2 && ev.targetTouches.length == 2) {
 			canvas.classList.toggle("move");
+			toolbar.style.backgroundColor = "red";
+		}
 		// cursor.style.opacity = 0;
 		painting = true;
 		tdraw(e);
