@@ -77,12 +77,15 @@ window.addEventListener("load", () => {
 	}
 
 	function tstartPosition(e) {
-		cursor.style.opacity = 0;
+		if (e.target.length == 2 && ev.targetTouches.length == 2)
+			canvas.classList.toggle("move");
+		// cursor.style.opacity = 0;
 		painting = true;
 		tdraw(e);
 	}
 
 	function finishedPosition() {
+		canvas.classList.remove("move");
 		if (painting) storeHistory();
 		painting = false;
 		ctx.beginPath();
