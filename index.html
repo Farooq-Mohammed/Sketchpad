@@ -5,17 +5,24 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Drawing App</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		/>
 		<link rel="stylesheet" href="style.css" />
 		<script src="script.js" defer></script>
 	</head>
 	<body>
-		<!-- <h1>Hello poppers</h1> -->
 		<canvas></canvas>
 		<div class="tools">
 			<div class="font">
-				<p style="font-size: 1.1em; user-select: none">Font size:</p>
-				<input type="range" min="50" max="1000" value="400" class="slider" />
+				<p style="font-size: 1.1em; user-select: none">Size:</p>
+				<input type="range" min="50" max="1000" value="200" class="slider" />
 				<span class="rangeValue"></span>
+			</div>
+			<div class="history">
+				<button class="undo"><i class="fas fa-undo"></i></button>
+				<button class="clear"><i class="fas fa-trash-alt"></i></button>
 			</div>
 			<div class="colors">
 				<button
@@ -43,7 +50,7 @@
 					value="#fff700"
 					style="background-color: #fff700"
 				></button>
-				<button
+				<!-- <button
 					class="orange"
 					value="#ff7f50"
 					style="background-color: #ff7f50"
@@ -52,7 +59,7 @@
 					class="magenta"
 					value="#c71585"
 					style="background-color: #c71585"
-				></button>
+				></button> -->
 				<button
 					class="charcoal"
 					value="#36454f"
@@ -61,5 +68,6 @@
 				<input type="color" name="color" class="color-range" />
 			</div>
 		</div>
+		<div class="pen"></div>
 	</body>
 </html>

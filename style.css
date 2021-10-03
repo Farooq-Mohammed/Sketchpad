@@ -8,7 +8,7 @@ body {
 	padding: 0;
 	margin: 0;
 	height: 100vh;
-	width: 100vw;
+	width: 100%;
 	/* overflow: hidden; */
 	display: block;
 	align-items: center;
@@ -17,45 +17,57 @@ body {
 	background: #12374f;
 	color: #fff;
 	position: relative;
+	cursor: none;
+}
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+	background-color: red;
+}
+::-webkit-scrollbar-thumb {
+	background-color: rgba(17, 17, 17, 0.836);
 }
 canvas {
 	position: absolute;
 	inset: 10px;
 	margin-top: 75px;
 	background-color: #fff;
-	border: 2px solid lightcyan;
-	box-shadow: inset 0 0 25px grey;
+	box-shadow: 0 0 10px white;
 }
 .tools {
 	position: absolute;
+	padding: 20px;
 	top: 0;
 	left: 0;
 	height: 7%;
-	width: 100%;
+	width: max(100%);
 	display: inline-flex;
 	justify-content: space-evenly;
 	align-items: center;
 	background: #151515;
 	box-shadow: inset 0 0 10px grey;
+	cursor: none;
 }
 
 .font {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 1.2em;
+	cursor: none;
 }
 
 .slider {
 	width: 180px;
 	height: 15px;
-	margin: 20px;
+	/* margin: 20px; */
 	-webkit-appearance: none;
 	background: #111;
 	outline: none;
 	border-radius: 15px;
 	overflow: hidden;
 	box-shadow: inset 0 0 5px rgba(0, 0, 0, 1);
+	transform: scale(0.83);
+	cursor: none;
 }
 .slider::-webkit-slider-thumb {
 	width: 17px;
@@ -74,7 +86,25 @@ canvas {
 	position: relative;
 	display: block;
 	text-align: center;
-	font-size: 1.2em;
+	font-size: 0.9em;
+	cursor: none;
+}
+.undo,
+.clear {
+	border: none;
+	border-radius: 12%;
+	padding: 0.7em 1.2em;
+	background-color: transparent;
+	color: #ddd;
+	cursor: none;
+}
+.undo:hover,
+.clear:hover {
+	transition: 150ms ease-in-out;
+	/* background-color: #2d2d2d; */
+	background-color: #e9ecef;
+	color: #333;
+	cursor: none;
 }
 
 .colors {
@@ -85,12 +115,14 @@ canvas {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: none;
 }
-button {
+.colors > button {
 	margin: 0 3px;
 	padding: 0.8em;
 	border: none;
 	border: 1.5px solid white;
+	cursor: none;
 }
 .color-range {
 	-webkit-appearance: none;
@@ -99,5 +131,14 @@ button {
 	border: none;
 	background: none;
 	outline: none;
-	/* border: 2px solid #ffffff; */
+	cursor: none;
+}
+
+.pen {
+	position: absolute;
+	height: 5px;
+	width: 5px;
+	border-radius: 50%;
+	z-index: 100;
+	pointer-events: none;
 }

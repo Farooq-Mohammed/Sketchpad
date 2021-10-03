@@ -2,6 +2,21 @@ window.addEventListener("load", () => {
 	const canvas = document.querySelector("canvas");
 	const ctx = canvas.getContext("2d");
 
+	const clear = document.querySelector(".clear");
+
+	//cursor
+	const cursor = document.querySelector(".pen");
+	window.addEventListener("mousemove", (e) => {
+		cursor.style.top = e.pageY + "px";
+		cursor.style.left = e.pageX + "px";
+		cursor.style.backgroundColor = ctx.strokeStyle;
+	});
+
+	//undo
+	let restore_array = [];
+	let index = -1;
+	const undo = document.querySelector(".undo");
+
 	//font_size
 	const slider = document.querySelector(".slider");
 	const rangeValue = document.querySelector(".rangeValue");
@@ -43,13 +58,16 @@ window.addEventListener("load", () => {
 	// ctx.stroke();
 
 	// variables
+
 	let painting = false;
 
 	function startPosition(e) {
 		painting = true;
 		draw(e);
 	}
+
 	function finishedPosition() {
+		if (painting) storeHistory();
 		painting = false;
 		ctx.beginPath();
 	}
@@ -65,9 +83,39 @@ window.addEventListener("load", () => {
 		ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 	}
 
+	function storeHistory() {
+		if (Event.type != "mouseout" && painting) {
+			restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+			index += 1;
+		}
+		// console.log(restore_array);
+	}
+
+	function undo_last() {
+		if (index > 0) {
+			index -= 1;
+			restore_array.pop();
+			ctx.putImageData(restore_array[index], 0, 0);
+		} else {
+			clear_canvas();
+		}
+	}
+
+	function clear_canvas() {
+		ctx.strokeStyle = "black";
+		ctx.fillStyle = "white";
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		restore_array = [];
+		index = -1;
+	}
+
 	// Event listeners
 
 	canvas.addEventListener("mousedown", startPosition);
 	canvas.addEventListener("mouseup", finishedPosition);
+	canvas.addEventListener("mouseout", finishedPosition);
 	canvas.addEventListener("mousemove", draw);
+	undo.addEventListener("mousedown", undo_last);
+	clear.addEventListener("mousedown", clear_canvas);
 });
