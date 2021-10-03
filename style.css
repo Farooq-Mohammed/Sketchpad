@@ -34,6 +34,9 @@ canvas {
 	background-color: #fff;
 	box-shadow: 0 0 10px white;
 }
+.move {
+	pointer-events: none;
+}
 .tools {
 	position: absolute;
 	padding: 20px;
@@ -99,9 +102,10 @@ canvas {
 	cursor: none;
 }
 .undo:hover,
-.clear:hover {
+.undo:active,
+.clear:hover,
+.clear:active {
 	transition: 150ms ease-in-out;
-	/* background-color: #2d2d2d; */
 	background-color: #e9ecef;
 	color: #333;
 	cursor: none;

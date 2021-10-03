@@ -28,6 +28,10 @@ window.addEventListener("load", () => {
 		font_size = slider.value / 100;
 		rangeValue.innerText = font_size.toFixed(1);
 	});
+	slider.addEventListener("touchmove", () => {
+		font_size = slider.value / 100;
+		rangeValue.innerText = font_size.toFixed(1);
+	});
 
 	// color
 	const btn = document.querySelector(".colors");
@@ -35,7 +39,13 @@ window.addEventListener("load", () => {
 	btn.addEventListener("click", (e) => {
 		ctx.strokeStyle = e.target.value;
 	});
+	btn.addEventListener("touchstart", (e) => {
+		ctx.strokeStyle = e.target.value;
+	});
 	color.addEventListener("input", (e) => {
+		ctx.strokeStyle = e.target.value;
+	});
+	color.addEventListener("touchstart", (e) => {
 		ctx.strokeStyle = e.target.value;
 	});
 
@@ -67,6 +77,7 @@ window.addEventListener("load", () => {
 	}
 
 	function tstartPosition(e) {
+		cursor.style.opacity = 0;
 		painting = true;
 		tdraw(e);
 	}
@@ -101,6 +112,8 @@ window.addEventListener("load", () => {
 	function tdraw(e) {
 		e.preventDefault();
 		if (lastPt != null) {
+			ctx.lineWidth = font_size;
+			ctx.lineCap = "round";
 			ctx.beginPath();
 			ctx.moveTo(lastPt.x, lastPt.y);
 			ctx.lineTo(
@@ -156,4 +169,6 @@ window.addEventListener("load", () => {
 	canvas.addEventListener("touchcancel", tfinishedPosition);
 	canvas.addEventListener("touchend", tfinishedPosition);
 	canvas.addEventListener("touchmove", tdraw);
+	undo.addEventListener("touch", undo_last);
+	clear.addEventListener("touchstart", clear_canvas);
 });
