@@ -66,9 +66,22 @@ window.addEventListener("load", () => {
 		draw(e);
 	}
 
+	function tstartPosition(e) {
+		painting = true;
+		tdraw(e);
+	}
+
 	function finishedPosition() {
 		if (painting) storeHistory();
 		painting = false;
+		ctx.beginPath();
+	}
+
+	function tfinishedPosition() {
+		if (painting) storeHistory();
+		// e.preventDefault();
+		painting = false;
+		lastPt = null;
 		ctx.beginPath();
 	}
 
@@ -81,6 +94,25 @@ window.addEventListener("load", () => {
 		ctx.stroke();
 		ctx.beginPath();
 		ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+	}
+
+	let lastPt = null;
+
+	function tdraw(e) {
+		e.preventDefault();
+		if (lastPt != null) {
+			ctx.beginPath();
+			ctx.moveTo(lastPt.x, lastPt.y);
+			ctx.lineTo(
+				e.touches[0].pageX - canvas.offsetLeft,
+				e.touches[0].pageY - canvas.offsetTop,
+			);
+			ctx.stroke();
+		}
+		lastPt = {
+			x: e.touches[0].pageX - canvas.offsetLeft,
+			y: e.touches[0].pageY - canvas.offsetTop,
+		};
 	}
 
 	function storeHistory() {
@@ -119,9 +151,9 @@ window.addEventListener("load", () => {
 	undo.addEventListener("click", undo_last);
 	clear.addEventListener("click", clear_canvas);
 
-	canvas.addEventListener("touchstart", startPosition);
-	canvas.addEventListener("touchend", finishedPosition);
-	canvas.addEventListener("touchcancel", finishedPosition);
-	canvas.addEventListener("touchend", finishedPosition);
-	canvas.addEventListener("touchmove", draw);
+	canvas.addEventListener("touchstart", tstartPosition);
+	canvas.addEventListener("touchend", tfinishedPosition);
+	canvas.addEventListener("touchcancel", tfinishedPosition);
+	canvas.addEventListener("touchend", tfinishedPosition);
+	canvas.addEventListener("touchmove", tdraw);
 });
