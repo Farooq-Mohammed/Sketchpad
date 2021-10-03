@@ -116,6 +116,12 @@ window.addEventListener("load", () => {
 	canvas.addEventListener("mouseup", finishedPosition);
 	canvas.addEventListener("mouseout", finishedPosition);
 	canvas.addEventListener("mousemove", draw);
-	undo.addEventListener("mousedown", undo_last);
-	clear.addEventListener("mousedown", clear_canvas);
+	undo.addEventListener("click", undo_last);
+	clear.addEventListener("click", clear_canvas);
+
+	canvas.addEventListener("touchstart", startPosition);
+	canvas.addEventListener("touchend", finishedPosition);
+	canvas.addEventListener("touchcancel", finishedPosition);
+	canvas.addEventListener("touchend", finishedPosition);
+	canvas.addEventListener("touchmove", draw);
 });

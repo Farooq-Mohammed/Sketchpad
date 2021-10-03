@@ -53,6 +53,7 @@ canvas {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transform: scale(0.83);
 	cursor: none;
 }
 
@@ -66,7 +67,6 @@ canvas {
 	border-radius: 15px;
 	overflow: hidden;
 	box-shadow: inset 0 0 5px rgba(0, 0, 0, 1);
-	transform: scale(0.83);
 	cursor: none;
 }
 .slider::-webkit-slider-thumb {
