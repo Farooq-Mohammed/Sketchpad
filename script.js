@@ -1,5 +1,6 @@
 window.addEventListener("load", () => {
 	const canvas = document.querySelector("canvas");
+	const canvasDiv = document.querySelector("canvas-div");
 	const ctx = canvas.getContext("2d");
 
 	const clear = document.querySelector(".clear");
@@ -50,9 +51,31 @@ window.addEventListener("load", () => {
 	});
 
 	//Resizing
-	canvas.height = window.innerHeight * 0.85;
-	canvas.width = window.innerWidth * 0.985;
+	// canvas.height = window.innerHeight * 0.85;
+	// canvas.width = window.innerWidth * 0.985;
+	canvas.height = 650;
+	canvas.width = 1500;
 
+	const tick = document.querySelector(".adjust");
+
+	tick.addEventListener("click", () => {
+		const h = document.querySelector(".H").value;
+		const w = document.querySelector(".W").value;
+
+		if (h > 10000 || w > 10000) {
+			alert("Size is too big");
+			return;
+		}
+		if (h < 100 || w < 100) {
+			alert("Size is too small");
+			return;
+		}
+		canvas.height = h;
+		canvas.width = w;
+
+		canvasDiv.style.height = h + 85;
+		canvasDiv.style.width = w + 85;
+	});
 	// ctx.strokeStyle = "red";
 	// ctx.lineWidth = 2;
 	//                 x    y  width height
@@ -81,7 +104,7 @@ window.addEventListener("load", () => {
 			canvas.classList.toggle("move");
 			toolbar.style.backgroundColor = "red";
 		}
-		// cursor.style.opacity = 0;
+		cursor.style.opacity = 0;
 		painting = true;
 		tdraw(e);
 	}
@@ -106,10 +129,10 @@ window.addEventListener("load", () => {
 		if (!painting) return;
 		ctx.lineWidth = font_size;
 		ctx.lineCap = "round";
-		ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+		ctx.lineTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
 		ctx.stroke();
 		ctx.beginPath();
-		ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+		ctx.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
 	}
 
 	let lastPt = null;
