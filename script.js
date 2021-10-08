@@ -72,9 +72,6 @@ window.addEventListener("load", () => {
 		}
 		canvas.height = h;
 		canvas.width = w;
-
-		canvasDiv.style.height = h + 85;
-		canvasDiv.style.width = w + 85;
 	});
 	// ctx.strokeStyle = "red";
 	// ctx.lineWidth = 2;
