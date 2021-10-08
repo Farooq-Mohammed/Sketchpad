@@ -2,7 +2,6 @@
 
 * {
 	box-sizing: border-box;
-	font-family: "Poppins", sans-serif;
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -18,11 +17,13 @@ html {
 	height: 100%;
 }
 body {
-	height: fit-content;
+	min-height: 100vh;
+	width: 100%;
 	display: flex;
-	background: var(--clr-bg);
-	position: relative;
 	flex-direction: column;
+	background: var(--clr-bg);
+	font-family: "Poppins", sans-serif;
+	position: relative;
 }
 .main {
 	position: relative;
