@@ -17,13 +17,7 @@ window.addEventListener("load", () => {
 	const move = document.querySelector(".move-btn");
 	move.addEventListener("click", () => {
 		canvas.classList.toggle("move");
-		if (canvas.classList.contains("move")) {
-			move.style.backgroundColor = "#ddd";
-			move.style.color = "#333";
-		} else {
-			move.style.backgroundColor = "transparent";
-			move.style.color = "#ddd";
-		}
+		move.classList.toggle("btn");
 	});
 
 	//undo
@@ -128,7 +122,7 @@ window.addEventListener("load", () => {
 		ctx.beginPath();
 	}
 
-	function tfinishedPosition() {
+	function tfinishedPosition(e) {
 		if (painting) storeHistory();
 		e.preventDefault();
 		painting = false;
