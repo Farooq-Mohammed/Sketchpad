@@ -13,6 +13,19 @@ window.addEventListener("load", () => {
 		cursor.style.backgroundColor = ctx.strokeStyle;
 	});
 
+	// Move btn
+	const move = document.querySelector(".move-btn");
+	move.addEventListener("click", () => {
+		canvas.classList.toggle("move");
+		if (canvas.classList.contains("move")) {
+			move.style.backgroundColor = "#ddd";
+			move.style.color = "#333";
+		} else {
+			move.style.backgroundColor = "transparent";
+			move.style.color = "#ddd";
+		}
+	});
+
 	//undo
 	let restore_array = [];
 	let index = -1;
@@ -92,8 +105,10 @@ window.addEventListener("load", () => {
 	let painting = false;
 
 	function startPosition(e) {
-		painting = true;
-		draw(e);
+		if (e.button == 0) {
+			painting = true;
+			draw(e);
+		}
 	}
 
 	function tstartPosition(e) {
@@ -115,7 +130,7 @@ window.addEventListener("load", () => {
 
 	function tfinishedPosition() {
 		if (painting) storeHistory();
-		// e.preventDefault();
+		e.preventDefault();
 		painting = false;
 		lastPt = null;
 		ctx.beginPath();
