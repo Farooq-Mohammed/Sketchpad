@@ -56,7 +56,7 @@ canvas {
 	pointer-events: none;
 }
 .tools {
-	position: absolute;
+	position: fixed;
 	padding: 20px;
 	top: 0;
 	left: 0;
@@ -68,6 +68,7 @@ canvas {
 	background: #151515;
 	box-shadow: inset 0 0 10px grey;
 	cursor: none;
+	z-index: 100;
 }
 
 .font {
@@ -166,6 +167,7 @@ p {
 	height: 5px;
 	width: 5px;
 	border-radius: 50%;
+	box-shadow: 0px 0px 10px #fff;
 	z-index: 100;
 	pointer-events: none;
 }
@@ -198,8 +200,10 @@ p {
 }
 .H:active,
 .H:hover,
+.H:focus,
 .W:active,
-.W:hover {
+.W:hover,
+.W:focus {
 	transition: all 0.2s ease-in-out;
 	opacity: 0.9;
 }
@@ -210,7 +214,9 @@ input::-webkit-inner-spin-button {
 }
 
 .footer {
-	height: 50px;
+	position: fixed;
+	bottom: 0;
+	height: 35px;
 	width: 100%;
 	margin-top: auto;
 	background-color: red;
