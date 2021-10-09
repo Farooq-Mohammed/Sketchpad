@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
 	const canvas = document.querySelector("canvas");
-	const canvasDiv = document.querySelector("canvas-div");
+	const canvasDiv = document.querySelector(".canvas-div");
 	const ctx = canvas.getContext("2d");
 
 	const clear = document.querySelector(".clear");
@@ -62,6 +62,8 @@ window.addEventListener("load", () => {
 	// canvas.width = window.innerWidth * 0.985;
 	canvas.height = 650;
 	canvas.width = 1500;
+	canvasDiv.style.height = `${650 + 75}px`;
+	canvasDiv.style.width = `${1500}px`;
 
 	const tick = document.querySelector(".adjust");
 
@@ -79,6 +81,9 @@ window.addEventListener("load", () => {
 		}
 		canvas.height = h;
 		canvas.width = w;
+		canvasDiv.style.height = `${h}px`;
+		canvasDiv.style.width = `${w}px`;
+		// ctx.putImageData(restore_array[index], 0, 0);
 	});
 	// ctx.strokeStyle = "red";
 	// ctx.lineWidth = 2;
@@ -124,7 +129,7 @@ window.addEventListener("load", () => {
 
 	function tfinishedPosition(e) {
 		if (painting) storeHistory();
-		e.preventDefault();
+		// e.preventDefault();
 		painting = false;
 		lastPt = null;
 		ctx.beginPath();
@@ -144,7 +149,7 @@ window.addEventListener("load", () => {
 	let lastPt = null;
 
 	function tdraw(e) {
-		e.preventDefault();
+		// e.preventDefault();
 		if (lastPt != null) {
 			ctx.lineWidth = font_size;
 			ctx.lineCap = "round";

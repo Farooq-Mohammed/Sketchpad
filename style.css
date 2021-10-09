@@ -13,17 +13,13 @@
 	--clr-slider: #00fd0a;
 	--clr-footer: rgba(33, 37, 41, 0.87);
 }
-html {
-	height: 100%;
-}
 body {
 	min-height: 100vh;
 	width: 100%;
-	display: flex;
-	flex-direction: column;
 	background: var(--clr-bg);
+	display: flex;
 	font-family: "Poppins", sans-serif;
-	position: relative;
+	margin: 0;
 }
 .main {
 	position: relative;
@@ -34,6 +30,7 @@ body {
 	justify-content: center;
 	flex-direction: column;
 	color: var(--clr-primary);
+	/* overflow-x: auto; */
 	position: relative;
 	cursor: none;
 }
@@ -52,6 +49,7 @@ canvas {
 	margin-top: 75px;
 	background-color: var(--clr-primary);
 	box-shadow: 0 0 10px #fff;
+	cursor: crosshair;
 }
 
 .canvas-div {
@@ -120,6 +118,7 @@ canvas {
 	font-size: 0.9em;
 	cursor: none;
 }
+
 .undo,
 .clear {
 	border: none;
@@ -210,12 +209,12 @@ p {
 	transition: 150ms ease-in-out;
 	background-color: var(--clr-hover);
 	color: #333;
-	cursor: none;
 }
 
 .btn {
 	background: #ddd;
 	color: #333;
+	cursor: none;
 }
 
 .H,
@@ -250,11 +249,12 @@ footer {
 	padding: 0 2em;
 	background-color: var(--clr-footer);
 	position: fixed;
-	bottom: 0;
+	bottom: 0rem;
 	overflow: hidden;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: center;
+	z-index: 200;
 }
 
 .f1,
