@@ -63,7 +63,7 @@ window.addEventListener("load", () => {
 	canvas.height = 650;
 	canvas.width = 1500;
 	canvasDiv.style.height = `${650 + 75}px`;
-	canvasDiv.style.width = `${1500}px`;
+	canvasDiv.style.width = `${1500 + 20}px`;
 
 	const tick = document.querySelector(".adjust");
 
@@ -83,6 +83,7 @@ window.addEventListener("load", () => {
 		canvas.width = w;
 		canvasDiv.style.height = `${h}px`;
 		canvasDiv.style.width = `${w}px`;
+		ctx.putImageData(restore_array[index], 0, 0);
 		// ctx.putImageData(restore_array[index], 0, 0);
 	});
 	// ctx.strokeStyle = "red";
