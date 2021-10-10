@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
 	const canvas = document.querySelector("canvas");
-	const canvasDiv = document.querySelector(".canvas-div");
+	const canvasDiv = document.querySelector("canvas-div");
 	const ctx = canvas.getContext("2d");
 
 	const clear = document.querySelector(".clear");
@@ -8,8 +8,13 @@ window.addEventListener("load", () => {
 	//cursor
 	const cursor = document.querySelector(".pen");
 	window.addEventListener("mousemove", (e) => {
-		cursor.style.top = e.pageY + "px";
-		cursor.style.left = e.pageX + "px";
+		cursor.style.top = e.pageY - 2 + "px";
+		cursor.style.left = e.pageX - 2 + "px";
+		cursor.style.backgroundColor = ctx.strokeStyle;
+	});
+	window.addEventListener("touchmove", (e) => {
+		cursor.style.top = e.touches[0].pageY + "px";
+		cursor.style.left = e.touches[0].pageX + "px";
 		cursor.style.backgroundColor = ctx.strokeStyle;
 	});
 
@@ -17,7 +22,13 @@ window.addEventListener("load", () => {
 	const move = document.querySelector(".move-btn");
 	move.addEventListener("click", () => {
 		canvas.classList.toggle("move");
-		move.classList.toggle("btn");
+		if (canvas.classList.contains("move")) {
+			move.style.backgroundColor = "#ddd";
+			move.style.color = "#333";
+		} else {
+			move.style.backgroundColor = "red";
+			move.style.color = "#ddd";
+		}
 	});
 
 	//undo
@@ -58,12 +69,10 @@ window.addEventListener("load", () => {
 	});
 
 	//Resizing
-	// canvas.height = window.innerHeight * 0.85;
-	// canvas.width = window.innerWidth * 0.985;
-	canvas.height = 650;
-	canvas.width = 1500;
-	canvasDiv.style.height = `${650 + 75}px`;
-	canvasDiv.style.width = `${1500 + 20}px`;
+	canvas.height = window.innerHeight * 0.85;
+	canvas.width = window.innerWidth * 0.985;
+	// canvas.height = 650;
+	// canvas.width = 1500;
 
 	const tick = document.querySelector(".adjust");
 
@@ -81,10 +90,7 @@ window.addEventListener("load", () => {
 		}
 		canvas.height = h;
 		canvas.width = w;
-		canvasDiv.style.height = `${h}px`;
-		canvasDiv.style.width = `${w}px`;
-		ctx.putImageData(restore_array[index], 0, 0);
-		// ctx.putImageData(restore_array[index], 0, 0);
+		if (index != -1) ctx.putImageData(restore_array[index], 0, 0);
 	});
 	// ctx.strokeStyle = "red";
 	// ctx.lineWidth = 2;
@@ -112,9 +118,21 @@ window.addEventListener("load", () => {
 	}
 
 	function tstartPosition(e) {
+		lastPt = {
+			x: e.touches[0].pageX - canvas.offsetLeft,
+			y: e.touches[0].pageY - canvas.offsetTop,
+		};
+		ctx.lineWidth = font_size;
+		ctx.lineCap = "round";
+		ctx.beginPath();
+		ctx.moveTo(lastPt.x, lastPt.y);
+		ctx.lineTo(
+			e.touches[0].pageX - canvas.offsetLeft,
+			e.touches[0].pageY - canvas.offsetTop,
+		);
+		ctx.stroke();
 		if (e.target.length == 2 && ev.targetTouches.length == 2) {
 			canvas.classList.toggle("move");
-			toolbar.style.backgroundColor = "red";
 		}
 		cursor.style.opacity = 0;
 		painting = true;
@@ -123,14 +141,15 @@ window.addEventListener("load", () => {
 
 	function finishedPosition() {
 		canvas.classList.remove("move");
+
 		if (painting) storeHistory();
 		painting = false;
 		ctx.beginPath();
 	}
 
-	function tfinishedPosition(e) {
+	function tfinishedPosition() {
 		if (painting) storeHistory();
-		// e.preventDefault();
+		cursor.style.opacity = 1;
 		painting = false;
 		lastPt = null;
 		ctx.beginPath();
@@ -150,7 +169,8 @@ window.addEventListener("load", () => {
 	let lastPt = null;
 
 	function tdraw(e) {
-		// e.preventDefault();
+		e.preventDefault();
+		// e.stopImmediatePropagation();
 		if (lastPt != null) {
 			ctx.lineWidth = font_size;
 			ctx.lineCap = "round";
@@ -210,5 +230,5 @@ window.addEventListener("load", () => {
 	canvas.addEventListener("touchend", tfinishedPosition);
 	canvas.addEventListener("touchmove", tdraw);
 	undo.addEventListener("touch", undo_last);
-	clear.addEventListener("touchstart", clear_canvas);
+	clear.addEventListener("touch", clear_canvas);
 });
