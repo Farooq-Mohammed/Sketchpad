@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
 			move.style.backgroundColor = "#ddd";
 			move.style.color = "#333";
 		} else {
-			move.style.backgroundColor = "red";
+			move.style.backgroundColor = "transparent";
 			move.style.color = "#ddd";
 		}
 	});
@@ -69,10 +69,10 @@ window.addEventListener("load", () => {
 	});
 
 	//Resizing
-	canvas.height = window.innerHeight * 0.85;
-	canvas.width = window.innerWidth * 0.985;
-	// canvas.height = 650;
-	// canvas.width = 1500;
+	// canvas.height = window.innerHeight * 0.85;
+	// canvas.width = window.innerWidth * 0.985;
+	canvas.height = 650;
+	canvas.width = 1500;
 
 	const tick = document.querySelector(".adjust");
 

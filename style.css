@@ -11,7 +11,7 @@ html {
 	height: 100%;
 }
 body {
-	height: 110vh;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 
@@ -259,4 +259,36 @@ footer {
 .f1,
 .f2 {
 	padding: 5px 0 0 1em;
+}
+
+@media only screen and (max-width: 999px) {
+	.black,
+	.blue,
+	.yellow,
+	.charcoal {
+		display: none;
+		transition: all 250ms ease-in-out;
+	}
+}
+
+@media only screen and (max-width: 575px) {
+	.tools {
+		transform: scale(0.8) translateX(-15.5em) translateY(-12px);
+		transition: all 250ms ease-in-out;
+	}
+	canvas {
+		transform: translateY(-12px);
+		transition: all 250ms ease-in-out;
+	}
+	.H,
+	.W {
+		width: 60px;
+	}
+}
+
+@media only screen and (max-width: 829px) {
+	p,
+	.font {
+		display: none;
+	}
 }
